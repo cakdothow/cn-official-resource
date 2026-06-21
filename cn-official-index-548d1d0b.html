@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再次到访 · 关于 ufc 的一些记录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f9f7f4;
+            font-family: system-ui, -apple-system, "Noto Serif SC", "Times New Roman", serif;
+            color: #2c2b28;
+            line-height: 1.7;
+            padding: 40px 20px 60px;
+            letter-spacing: 0.02em;
+        }
+
+        .page {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        /* 主视觉区域 —— 克制短文 */
+        .hero {
+            border-bottom: 1px solid #e3ddd3;
+            padding-bottom: 36px;
+            margin-bottom: 48px;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #3a3530;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: #5a5450;
+            margin-bottom: 20px;
+        }
+
+        .hero .footnote {
+            font-size: 0.9rem;
+            color: #8b847e;
+            border-left: 3px solid #d8cfc5;
+            padding-left: 16px;
+            font-style: normal;
+        }
+
+        /* 内容卡片通用 */
+        .card {
+            background-color: #ffffffef;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-radius: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid #eae5de;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #3e3934;
+            margin-bottom: 14px;
+            border-bottom: 1px dashed #dbd3c9;
+            padding-bottom: 8px;
+        }
+
+        .card ul, .card p {
+            margin-bottom: 12px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding-left: 22px;
+            position: relative;
+            margin-bottom: 10px;
+            color: #4b4641;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 6px;
+            color: #b5a99a;
+            font-weight: bold;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0 6px;
+        }
+
+        .tag {
+            background: #f0ebe4;
+            padding: 4px 14px;
+            font-size: 0.85rem;
+            color: #5a514b;
+            border-radius: 20px;
+            letter-spacing: 0.03em;
+        }
+
+        /* 引用块 / 提示框 */
+        .inset-box {
+            background: #f4efe8;
+            border-left: 4px solid #c9b8a9;
+            padding: 20px 24px;
+            margin: 32px 0 28px;
+            font-size: 0.98rem;
+            color: #4b433d;
+        }
+
+        .inset-box strong {
+            font-weight: 600;
+            color: #302c28;
+        }
+
+        .inset-box a {
+            color: #5a4f44;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 0.5px;
+        }
+
+        .inset-box a:hover {
+            color: #241f1b;
+            text-decoration-thickness: 1px;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: transparent;
+            padding: 16px 0 8px;
+            border-top: 1px solid #e4ddd4;
+            margin-top: 20px;
+        }
+
+        .link-paragraph p {
+            font-size: 1rem;
+            color: #4f4943;
+        }
+
+        .link-paragraph a {
+            color: #5a4f44;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 0.5px;
+            transition: color 0.15s;
+        }
+
+        .link-paragraph a:hover {
+            color: #221d19;
+        }
+
+        .faq-mini {
+            margin-top: 24px;
+        }
+
+        .faq-mini details {
+            margin-bottom: 14px;
+            border-bottom: 1px dashed #ddd6cc;
+            padding-bottom: 10px;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #3f3a34;
+            cursor: pointer;
+            padding: 4px 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::before {
+            content: "▸";
+            color: #b6a89a;
+            margin-right: 10px;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-mini .answer {
+            padding: 10px 0 6px 24px;
+            color: #55504a;
+            font-size: 0.95rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e3dcd2;
+            margin: 38px 0 28px;
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: #989087;
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 16px;
+            border-top: 1px solid #ece7e0;
+        }
+
+        @media (max-width: 540px) {
+            body { padding: 28px 16px 50px; }
+            .card { padding: 22px 20px; }
+            .hero h1 { font-size: 1.6rem; }
+            .inset-box { padding: 16px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 主视觉 / 再次访问 -->
+        <div class="hero">
+            <h1>再次打开，或偶然路过</h1>
+            <p>有些页面会留在浏览器的收藏夹里，隔一段时间点开，发现内容还是那些，看的人却有了新的理解。<br>
+            cn-official-ufc.com 对我来说就是这样一个地方——不需要每天刷新，但值得放一个书签。</p>
+            <div class="footnote">写于一个十月的下午，浏览器里只开了这个标签页。</div>
+        </div>
+
+        <!-- 用途卡片 -->
+        <div class="card">
+            <h2>这里通常用来做什么</h2>
+            <ul>
+                <li>赛事日程与对阵信息——尤其是重大比赛前的官方确认。</li>
+                <li>运动员档案与排名变动的原始出处，比二手消息更可靠。</li>
+                <li>规则、体重级别、历史记录等基础资料，适合新老爱好者随时查阅。</li>
+                <li>新闻与官方声明，避免被碎片化解读带偏。</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag">日程</span>
+                <span class="tag">排名</span>
+                <span class="tag">档案</span>
+                <span class="tag">公告</span>
+            </div>
+        </div>
+
+        <!-- 适合人群卡片 -->
+        <div class="card">
+            <h2>什么样的人会反复看</h2>
+            <ul>
+                <li>持续关注某个选手职业生涯的观众——从首秀到冠军战，数据不会说谎。</li>
+                <li>比赛前后需要快速核实信息的人，比如播客主、写手、讨论组常客。</li>
+                <li>刚开始接触综合格斗，想从官方源头了解 <a href="https://cn-official-ufc.com">ufc</a> 是什么、规则如何、谁在打。</li>
+                <li>像我一样，只是偶尔想看看有没有更新，顺便回忆一下上次看比赛是哪一场。</li>
+            </ul>
+        </div>
+
+        <!-- 提示框 / 引用块：收藏与回访 -->
+        <div class="inset-box">
+            <strong>一个小习惯：</strong> 把页面加到书签栏，或者记在备忘录里。下次想找官方信息时，不用再经过搜索引擎和一堆转载页面。直接打开这个地址，干净、直接。<br>
+            <span style="display: inline-block; margin-top: 8px;">→ <a href="https://cn-official-ufc.com">ufc</a></span>
+        </div>
+
+        <!-- 自然链接段落（嵌入句子） -->
+        <div class="link-paragraph">
+            <p>如果你之前收藏过某个链接但不确定是不是最新的，可以直接在浏览器输入 <a href="https://cn-official-ufc.com">ufc</a> 的中文官方地址——通常它会重定向到最新的内容页，省去翻记录的麻烦。我试过几次，每次都管用。</p>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <details>
+                <summary>这个网站和英文官网内容一样吗？</summary>
+                <div class="answer">大部分核心内容同步，包括赛事、排名、运动员资料。中文版会额外提供本地化新闻和地区性信息，适合中文读者。</div>
+            </details>
+            <details>
+                <summary>需要注册或登录才能看吗？</summary>
+                <div class="answer">浏览公开信息不需要任何账号。少数互动功能（如评论或个性化设置）可能要求注册，但看比赛日程和新闻是全程开放的。</div>
+            </details>
+            <details>
+                <summary>为什么我该收藏这个页面，而不是用第三方 App？</summary>
+                <div class="answer">第三方平台通常有编辑延迟和二次解读，官方源最大的优势是原始性和准确性。尤其是比赛取消、选手更换这类变动，官方页面永远最先更新。</div>
+            </details>
+        </div>
+
+        <hr>
+
+        <div class="footer-note">
+            页面结构：信息卡片 · 最后更新：2025年10月
+        </div>
+    </div>
+</body>
+</html>
